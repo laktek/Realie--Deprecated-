@@ -1,5 +1,5 @@
 # Edit this Gemfile to bundle your application's dependencies.
-directory "../../others/rails", :glob => "{*/,}*.gemspec"
+directory "vendor/rails", :glob => "{*/,}*.gemspec"
 git "git://github.com/rails/arel.git"
 git "git://github.com/rails/rack.git"
 
@@ -9,14 +9,15 @@ gem "rails", "3.0.pre"
 # gem "rails", :git => "git://github.com/rails/rails.git"
 
 ## Bundle the gems you use:
+gem "yajl-ruby", :require_as => "yajl"
 # gem "bj"
 # gem "hpricot", "0.6"
 # gem "sqlite3-ruby", :require_as => "sqlite3"
 # gem "aws-s3", :require_as => "aws/s3"
 
 ## Bundle gems used only in certain environments:
- gem "rspec", :only => :test
- gem "rspec_rails", :only => :test
+  gem "rspec", :only => :test
+ # gem "rspec_rails", :only => :test
 
 # only :test do
 #   gem "webrat"

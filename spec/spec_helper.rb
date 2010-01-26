@@ -6,12 +6,6 @@ $TESTING=true
 require 'redis'
 require 'redis/raketasks'
 
-class RedisRunner
-  def self.redisconfdir
-    '/home/lakshan/sources/redis-1.1.95-beta/redis.conf'
-  end
-end
-
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record

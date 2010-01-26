@@ -49,7 +49,7 @@ describe "Line" do
      @it.position = "2" 
      @it.save
 
-     @test_db["line_sha"].should == "{content: hello, position: 2}"
+     @test_db["line:line_sha"].should == "{content: hello, position: 2}"
     end
 
   end

@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class Line 
 
   attr_accessor :id, :pad, :user, :content, :position
@@ -25,7 +27,7 @@ class Line
 
   private
   def line_sha_value
-    "line_sha"
+    "line:line_sha"
   end
 
 end
