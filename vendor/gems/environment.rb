@@ -22,8 +22,8 @@ module Bundler
   $LOAD_PATH.unshift File.expand_path("#{dir}/../../../../others/rails/activemodel/lib")
   $LOAD_PATH.unshift File.expand_path("#{dir}/gems/mime-types-1.16/bin")
   $LOAD_PATH.unshift File.expand_path("#{dir}/gems/mime-types-1.16/lib")
-  $LOAD_PATH.unshift File.expand_path("#{dir}/gems/mail-1.5.0/bin")
-  $LOAD_PATH.unshift File.expand_path("#{dir}/gems/mail-1.5.0/lib")
+  $LOAD_PATH.unshift File.expand_path("#{dir}/gems/mail-1.5.1/bin")
+  $LOAD_PATH.unshift File.expand_path("#{dir}/gems/mail-1.5.1/lib")
   $LOAD_PATH.unshift File.expand_path("#{dir}/../../../../others/rails/actionmailer/bin")
   $LOAD_PATH.unshift File.expand_path("#{dir}/../../../../others/rails/actionmailer/lib")
   $LOAD_PATH.unshift File.expand_path("#{dir}/gems/abstract-1.0.0/bin")
@@ -32,6 +32,8 @@ module Bundler
   $LOAD_PATH.unshift File.expand_path("#{dir}/gems/erubis-2.6.5/lib")
   $LOAD_PATH.unshift File.expand_path("#{dir}/../../../../others/rails/actionpack/bin")
   $LOAD_PATH.unshift File.expand_path("#{dir}/../../../../others/rails/actionpack/lib")
+  $LOAD_PATH.unshift File.expand_path("#{dir}/gems/rspec-1.2.9/bin")
+  $LOAD_PATH.unshift File.expand_path("#{dir}/gems/rspec-1.2.9/lib")
   $LOAD_PATH.unshift File.expand_path("#{dir}/gems/rake-0.8.7/bin")
   $LOAD_PATH.unshift File.expand_path("#{dir}/gems/rake-0.8.7/lib")
   $LOAD_PATH.unshift File.expand_path("#{dir}/../../../../others/rails/railties/bin")
@@ -64,8 +66,8 @@ module Bundler
   @bundled_specs["activemodel"].loaded_from = "#{dir}/specifications/activemodel-3.0.pre.gemspec"
   @bundled_specs["mime-types"] = eval(File.read("#{dir}/specifications/mime-types-1.16.gemspec"))
   @bundled_specs["mime-types"].loaded_from = "#{dir}/specifications/mime-types-1.16.gemspec"
-  @bundled_specs["mail"] = eval(File.read("#{dir}/specifications/mail-1.5.0.gemspec"))
-  @bundled_specs["mail"].loaded_from = "#{dir}/specifications/mail-1.5.0.gemspec"
+  @bundled_specs["mail"] = eval(File.read("#{dir}/specifications/mail-1.5.1.gemspec"))
+  @bundled_specs["mail"].loaded_from = "#{dir}/specifications/mail-1.5.1.gemspec"
   @bundled_specs["actionmailer"] = eval(File.read("#{dir}/specifications/actionmailer-3.0.pre.gemspec"))
   @bundled_specs["actionmailer"].loaded_from = "#{dir}/specifications/actionmailer-3.0.pre.gemspec"
   @bundled_specs["abstract"] = eval(File.read("#{dir}/specifications/abstract-1.0.0.gemspec"))
@@ -74,6 +76,8 @@ module Bundler
   @bundled_specs["erubis"].loaded_from = "#{dir}/specifications/erubis-2.6.5.gemspec"
   @bundled_specs["actionpack"] = eval(File.read("#{dir}/specifications/actionpack-3.0.pre.gemspec"))
   @bundled_specs["actionpack"].loaded_from = "#{dir}/specifications/actionpack-3.0.pre.gemspec"
+  @bundled_specs["rspec"] = eval(File.read("#{dir}/specifications/rspec-1.2.9.gemspec"))
+  @bundled_specs["rspec"].loaded_from = "#{dir}/specifications/rspec-1.2.9.gemspec"
   @bundled_specs["rake"] = eval(File.read("#{dir}/specifications/rake-0.8.7.gemspec"))
   @bundled_specs["rake"].loaded_from = "#{dir}/specifications/rake-0.8.7.gemspec"
   @bundled_specs["railties"] = eval(File.read("#{dir}/specifications/railties-3.0.pre.gemspec"))
