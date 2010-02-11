@@ -1,7 +1,7 @@
 require 'abstract_unit'
 
 class AutoLayoutMailer < ActionMailer::Base
-  
+
   def hello
     recipients 'test@localhost'
     subject    "You have a mail"
@@ -14,7 +14,7 @@ class AutoLayoutMailer < ActionMailer::Base
     from       "tester@example.com"
 
     @world = "Earth"
-    render(:inline => "Hello, <%= @world %>", :layout => 'spam')
+    body render(:inline => "Hello, <%= @world %>", :layout => 'spam')
   end
 
   def nolayout
@@ -23,7 +23,7 @@ class AutoLayoutMailer < ActionMailer::Base
     from       "tester@example.com"
 
     @world = "Earth"
-    render(:inline => "Hello, <%= @world %>", :layout => false)
+    body render(:inline => "Hello, <%= @world %>", :layout => false)
   end
 
   def multipart(type = nil)
@@ -77,7 +77,7 @@ class LayoutMailerTest < Test::Unit::TestCase
     # CHANGED: content_type returns an object
     # assert_equal 'text/plain', mail.parts.first.content_type
     assert_equal 'text/plain', mail.parts.first.mime_type
-    
+
     # CHANGED: body returns an object
     # assert_equal "text/plain layout - text/plain multipart", mail.parts.first.body
     assert_equal "text/plain layout - text/plain multipart", mail.parts.first.body.to_s

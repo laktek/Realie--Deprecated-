@@ -33,8 +33,11 @@ describe "Line" do
 
     before do
       @pad = Pad.new.save
-      @it.pad = @pad
+      @it.pad = 1 #@pad
       @it.user = 1 #should fix
+      @it.content = "hello"
+      @it.position = 2 
+      @it.stub!(:digest_for_line_content).and_return("line_sha")
     end
     
     it "should increase the global line count" do
@@ -45,11 +48,32 @@ describe "Line" do
     end
 
     it "should store the line in global line set" do
-     @it.content = "hello"
-     @it.position = "2" 
      @it.save
+     @test_db["line:line_sha"].should == "{\"user\":1,\"position\":2,\"content\":\"hello\"}" 
+    end
 
-     @test_db["line:line_sha"].should == "{content: hello, position: 2}"
+    it "should increase the line count of the pad" do
+      @test_db["pad:1:lines"] = "5"
+      @it.save
+      @test_db["pad:1:lines"].should == "6"
+    end
+
+    it "should add the line to pad's timeline of edits" do
+      @it.save
+      @test_db.rpop("pad:1:timeline").should == "line_sha"
+    end
+
+    it "should add the line to pad's snapshot" do
+      @it.save
+      @test_db.sismember("pad:1:snapshot_lines", "2").should be_true
+      @test_db["pad:1:snapshot:2"].should == "line_sha"
+    end
+
+    it "should replace if there is already a line in pad's snapshot" do
+      @test_db["pad:1:snapshot:2"] = "old_line_sha"
+
+      @it.save
+      @test_db["pad:1:snapshot:2"].should == "line_sha"
     end
 
   end

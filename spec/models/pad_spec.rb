@@ -14,6 +14,7 @@ describe "Pad" do
 
   before(:each) do
     Pad.stub!(:store).and_return(@test_db)
+    Line.stub!(:store).and_return(@test_db)
     @it = Pad.new
   end
 
@@ -90,6 +91,64 @@ describe "Pad" do
       @test_db.scard("pads:1:users").should == 1
       #should implement
       #@it.users.count.should == 1
+    end
+  end
+
+  describe "getting the snapshot of a pad" do
+    before do
+      @pad = Pad.new.save
+
+      @line2 = Line.new
+      @line2.pad = 1
+      @line2.user = 1
+      @line2.content = "world" 
+      @line2.position = 2
+      @line2.save
+
+      @line1 = Line.new
+      @line1.pad = 1
+      @line1.user = 1
+      @line1.content = "hello" 
+      @line1.position = 1
+      @line1.save
+
+    end
+
+    it "should include all lines in the pad" do
+      @pad.snapshot.length.should == 2
+    end
+
+    it "should sort the lines in ascending order" do
+      @pad.snapshot.should == ["hello", "world"]
+    end
+  end
+
+  describe "getting the timeline of the pad" do
+    before do
+      @pad = Pad.new.save
+
+      @line2 = Line.new
+      @line2.pad = 1
+      @line2.user = 1
+      @line2.content = "world" 
+      @line2.position = 2
+      @line2.save
+
+      @line1 = Line.new
+      @line1.pad = 1
+      @line1.user = 1
+      @line1.content = "hello" 
+      @line1.position = 1
+      @line1.save
+
+    end
+
+    it "should include all lines in the pad" do
+      @pad.timeline.length.should == 2
+    end
+
+    it "should return the lines in insertion order" do
+      @pad.timeline.should == ["world", "hello"]
     end
   end
 

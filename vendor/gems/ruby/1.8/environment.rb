@@ -6,9 +6,9 @@ module Bundler
   ENV["PATH"]     = "#{dir}/../../../../bin:#{ENV["PATH"]}"
   ENV["RUBYOPT"]  = "-r#{file} #{ENV["RUBYOPT"]}"
 
-  $LOAD_PATH.unshift File.expand_path("#{dir}/gems/yajl-ruby-0.6.8/bin")
-  $LOAD_PATH.unshift File.expand_path("#{dir}/gems/yajl-ruby-0.6.8/lib")
-  $LOAD_PATH.unshift File.expand_path("#{dir}/gems/yajl-ruby-0.6.8/ext")
+  $LOAD_PATH.unshift File.expand_path("#{dir}/gems/yajl-ruby-0.6.9/bin")
+  $LOAD_PATH.unshift File.expand_path("#{dir}/gems/yajl-ruby-0.6.9/lib")
+  $LOAD_PATH.unshift File.expand_path("#{dir}/gems/yajl-ruby-0.6.9/ext")
   $LOAD_PATH.unshift File.expand_path("#{dir}/gems/i18n-0.3.3/bin")
   $LOAD_PATH.unshift File.expand_path("#{dir}/gems/i18n-0.3.3/lib")
   $LOAD_PATH.unshift File.expand_path("#{dir}/../../../rails/activesupport/bin")
@@ -53,8 +53,8 @@ module Bundler
   require "rubygems" unless respond_to?(:gem) # 1.9 already has RubyGems loaded
 
   @bundled_specs = {}
-  @bundled_specs["yajl-ruby"] = eval(File.read("#{dir}/specifications/yajl-ruby-0.6.8.gemspec"))
-  @bundled_specs["yajl-ruby"].loaded_from = "#{dir}/specifications/yajl-ruby-0.6.8.gemspec"
+  @bundled_specs["yajl-ruby"] = eval(File.read("#{dir}/specifications/yajl-ruby-0.6.9.gemspec"))
+  @bundled_specs["yajl-ruby"].loaded_from = "#{dir}/specifications/yajl-ruby-0.6.9.gemspec"
   @bundled_specs["i18n"] = eval(File.read("#{dir}/specifications/i18n-0.3.3.gemspec"))
   @bundled_specs["i18n"].loaded_from = "#{dir}/specifications/i18n-0.3.3.gemspec"
   @bundled_specs["activesupport"] = eval(File.read("#{dir}/specifications/activesupport-3.0.pre.gemspec"))

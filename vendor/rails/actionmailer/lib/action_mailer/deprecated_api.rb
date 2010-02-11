@@ -5,8 +5,25 @@ module ActionMailer
   module DeprecatedApi #:nodoc:
     extend ActiveSupport::Concern
 
-    module ClassMethods
+    included do
+      [:charset, :content_type, :mime_version, :implicit_parts_order].each do |method|
+        class_eval <<-FILE, __FILE__, __LINE__ + 1
+          def self.default_#{method}
+            @@default_#{method}
+          end
 
+          def self.default_#{method}=(value)
+            ActiveSupport::Deprecation.warn "ActionMailer::Base.default_#{method}=value is deprecated, " <<
+              "use defaults :#{method} => value instead"
+            @@default_#{method} = value
+          end
+
+          @@default_#{method} = nil
+        FILE
+      end
+    end
+
+    module ClassMethods
       # Deliver the given mail object directly. This can be used to deliver
       # a preconstructed mail object, like:
       #
@@ -76,10 +93,12 @@ module ActionMailer
 
     def render(*args)
       options = args.last.is_a?(Hash) ? args.last : {}
-      if options[:body]
+
+      if options[:body].is_a?(Hash)
         ActiveSupport::Deprecation.warn(':body in render deprecated. Please use instance ' <<
                                         'variables as assigns instead', caller[0,1])
-        body options.delete(:body)
+
+        options[:body].each { |k,v| instance_variable_set(:"@#{k}", v) }
       end
       super
     end
@@ -99,7 +118,15 @@ module ActionMailer
     end
 
   private
-    
+
+    def initialize_defaults(*)
+      @charset              ||= self.class.default_charset.try(:dup)
+      @content_type         ||= self.class.default_content_type.try(:dup)
+      @implicit_parts_order ||= self.class.default_implicit_parts_order.try(:dup)
+      @mime_version         ||= self.class.default_mime_version.try(:dup)
+      super
+    end
+
     def create_parts
       if @body.is_a?(Hash) && !@body.empty?
         ActiveSupport::Deprecation.warn "Giving a hash to body is deprecated, please use instance variables instead", caller[0,2]
